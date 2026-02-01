@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center">
+
+<svg id="s" width="400" height="250" style="border:2px solid black"></svg><br><br>
+
+<button onclick="s.innerHTML=''">Erase All</button>
+
+<script>
+let draw = false, line;
+
+s.onmousedown = e => {
+    draw = true;
+    line = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+    line.setAttribute("fill","none");
+    line.setAttribute("stroke","black");
+    line.setAttribute("stroke-width","2");
+    line.setAttribute("points","");
+    s.appendChild(line);
+};
+
+s.onmousemove = e => {
+    if(draw)
+        line.setAttribute(
+            "points",
+            line.getAttribute("points") + e.offsetX + "," + e.offsetY + " "
+        );
+};
+
+s.onmouseup = () => draw = false;
+</script>
+
+</body>
+</html>
